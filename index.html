@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rickroll</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+        }
+        video {
+            width: 80%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <video id="rickroll-video" autoplay>
+        <source src="rickroll.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            let timeToAllowExit = 30; // 30 seconds
+            let intervalId;
+
+            function preventExit() {
+                if (timeToAllowExit > 0) {
+                    alert(`You can't leave this page for ${timeToAllowExit} seconds!`);
+                    timeToAllowExit--;
+                } else {
+                    clearInterval(intervalId);
+                }
+            }
+
+            intervalId = setInterval(preventExit, 1000);
+
+            window.onbeforeunload = function() {
+                if (timeToAllowExit > 0) {
+                    return "You cannot leave this page yet!";
+                }
+            };
+        });
+    </script>
+</body>
+</html>
